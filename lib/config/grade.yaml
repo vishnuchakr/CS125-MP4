@@ -4,7 +4,7 @@ version: 1.0.0
 package: "edu.illinois.cs.cs125.mp4.lib"
 grading:
   timeout: PT5M
-  run: "./gradlew lib:grade -Pgrade.capture -Pgrade.secure -Pgrade.reporting.file={{ gradeFile }}"
+  run: "./gradlew lib:grade -c settings.gradle.grade -Pgrade.capture -Pgrade.secure -Pgrade.reporting.file={{ gradeFile }}"
   ignoreOutput:
     - "^java.security.policy: error parsing file.*"
     - "^Unable to initialize policy entry:.*"
