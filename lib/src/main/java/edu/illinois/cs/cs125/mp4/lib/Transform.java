@@ -58,13 +58,15 @@ public class Transform {
 
         RGBAPixel[][] changedImage = new RGBAPixel[originalImage.length][originalImage[0].length];
         for (int i = 0; i < originalImage.length; i++) {
-            for (int j = 0; j < originalImage[0].length; j++) {
+            for (int j = 0; j < originalImage[i].length; j++) {
+
                 if (originalImage[i][j].getGreen() > originalImage[i][j].getRed()
                     && originalImage[i][j].getGreen() > originalImage[i][j].getBlue()) {
                     changedImage[i][j] = RGBAPixel.getFillValue();
                 } else {
                     changedImage[i][j] = originalImage[i][j];
                 }
+
             }
         }
         return changedImage;
@@ -90,23 +92,38 @@ public class Transform {
     }
 
     /**
-     * Shift the image down by the specified amount.
-     * @param originalImage The original image.
-     * @param amount The amount.
-     * @return The pixel.
-     */
-    public static RGBAPixel[][] shiftDown(final RGBAPixel[][] originalImage, final int amount) {
-        return null;
-    }
-
-    /**
      * Shift the image left by the specified amount.
      * @param originalImage The original image.
      * @param amount The amount.
      * @return The pixel.
      */
     public static RGBAPixel[][] shiftLeft(final RGBAPixel[][] originalImage, final int amount) {
-        return null;
+        if (originalImage == null) {
+            return null;
+        }
+
+        RGBAPixel[][] changedImage = new RGBAPixel[originalImage.length][originalImage[0].length];
+        //if amount is larger than dimensions
+        if (amount >= originalImage.length) {
+            for (int i = 0; i < changedImage.length; i++) {
+                for (int j = 0; j < changedImage[i].length; j++) {
+                    changedImage[i][j] = RGBAPixel.getFillValue();
+                }
+            }
+            return changedImage;
+        }
+        //if amount is within the dimensions
+        for (int i = originalImage.length - 1; i >= amount; i--) {
+            for (int j = 0; j < originalImage[0].length; j++) {
+                changedImage[i - amount][j] = new RGBAPixel(originalImage[i][j]);
+            }
+        }
+        for (int i = originalImage.length - 1; i >= originalImage.length - amount; i--) {
+            for (int j = 0; j < originalImage[0].length; j++) {
+                changedImage[i][j] = RGBAPixel.getFillValue();
+            }
+        }
+        return changedImage;
     }
 
     /**
@@ -116,7 +133,67 @@ public class Transform {
      * @return The pixel.
      */
     public static RGBAPixel[][] shiftRight(final RGBAPixel[][] originalImage, final int amount) {
-        return null;
+        if (originalImage == null) {
+            return null;
+        }
+
+        RGBAPixel[][] changedImage = new RGBAPixel[originalImage.length][originalImage[0].length];
+        //if amount is larger than dimensions
+        if (amount >= originalImage.length) {
+            for (int i = 0; i < changedImage.length; i++) {
+                for (int j = 0; j < changedImage[i].length; j++) {
+                    changedImage[i][j] = RGBAPixel.getFillValue();
+                }
+            }
+            return changedImage;
+        }
+        //if amount is within the dimensions
+        for (int i = 0; i < originalImage.length - amount; i++) {
+            for (int j = 0; j < originalImage[0].length; j++) {
+                changedImage[i + amount][j] = new RGBAPixel(originalImage[i][j]);
+            }
+        }
+        for (int i = 0; i < amount; i++) {
+            for (int j = 0; j < originalImage[0].length; j++) {
+                changedImage[i][j] = RGBAPixel.getFillValue();
+            }
+        }
+        return changedImage;
+    }
+
+    /**
+     * Shift the image down by the specified amount.
+     * @param originalImage The original image.
+     * @param amount The amount.
+     * @return The pixel.
+     */
+    public static RGBAPixel[][] shiftDown(final RGBAPixel[][] originalImage, final int amount) {
+        if (originalImage == null) {
+            return null;
+        }
+
+        RGBAPixel[][] changedImage = new RGBAPixel[originalImage.length][originalImage[0].length];
+        //if amount is larger than dimensions
+        if (amount >= originalImage[0].length) {
+            for (int i = 0; i < changedImage.length; i++) {
+                for (int j = 0; j < changedImage[i].length; j++) {
+                    changedImage[i][j] = RGBAPixel.getFillValue();
+                }
+            }
+            return changedImage;
+        }
+        //if amount is within the dimensions
+        for (int i = 0; i < originalImage.length; i++) {
+            for (int j = 0; j < originalImage[0].length - amount; j++) {
+                changedImage[i][j + amount] = new RGBAPixel(originalImage[i][j]);
+            }
+        }
+        for (int i = 0; i < originalImage.length; i++) {
+            for (int j = 0; j < amount; j++) {
+                changedImage[i][j] = RGBAPixel.getFillValue();
+            }
+        }
+        return changedImage;
     }
 
     /**
@@ -126,7 +203,32 @@ public class Transform {
      * @return The pixel.
      */
     public static RGBAPixel[][] shiftUp(final RGBAPixel[][] originalImage, final int amount) {
-        return null;
+        if (originalImage == null) {
+            return null;
+        }
+
+        RGBAPixel[][] changedImage = new RGBAPixel[originalImage.length][originalImage[0].length];
+        //if amount is larger than dimensions
+        if (amount >= originalImage[0].length) {
+            for (int i = 0; i < changedImage.length; i++) {
+                for (int j = 0; j < changedImage[i].length; j++) {
+                    changedImage[i][j] = RGBAPixel.getFillValue();
+                }
+            }
+            return changedImage;
+        }
+        //if amount is within the dimensions
+        for (int i = 0; i < changedImage.length; i++) {
+            for (int j = changedImage[0].length - 1; j >= amount; j--) {
+                changedImage[i][j - amount] = new RGBAPixel(originalImage[i][j]);
+            }
+        }
+        for (int i = 0; i < changedImage.length; i++) {
+            for (int j = changedImage[0].length - 1; j >= changedImage[0].length - amount; j--) {
+                changedImage[i][j] = RGBAPixel.getFillValue();
+            }
+        }
+        return changedImage;
     }
 
     /**
