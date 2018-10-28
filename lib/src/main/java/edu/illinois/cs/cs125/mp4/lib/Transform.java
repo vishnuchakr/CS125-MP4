@@ -141,90 +141,9 @@ public class Transform {
             return null;
         }
 
-        //makes changedImage array same as original for rotations
         RGBAPixel[][] changedImage = new RGBAPixel[originalImage.length][originalImage[0].length];
+        return null;
 
-        for (int i = 0; i < changedImage.length; i++) {
-            for (int j = 0; j < changedImage[i].length; j++) {
-                changedImage[i][j] = new RGBAPixel(originalImage[i][j]);
-            }
-        }
-
-        //if dimensions are the same
-        if (changedImage.length == changedImage[0].length) {
-
-            //return
-            for (int i = 0; i < rotateSquare(changedImage).length; i++) {
-                for (int j = 0; j < rotateSquare(changedImage)[i].length; j++) {
-                    System.out.print(rotateSquare(changedImage)[i][j]);
-                }
-                System.out.println();
-            }
-            return rotateSquare(changedImage);
-
-        } else if (changedImage.length > changedImage[0].length) {
-            //define start and stop
-            int start = changedImage.length - changedImage[0].length - ((changedImage.length - changedImage[0].length) / 2);
-            int stop = changedImage.length - ((changedImage.length - changedImage[0].length) / 2);
-
-            //fill value
-            RGBAPixel[][] output = new RGBAPixel[changedImage.length][changedImage[0].length];
-            for (int i = 0; i < start; i++) {
-                for (int j = 0; j < output[0].length; j++) {
-                    output[i][j] = RGBAPixel.getFillValue();
-                }
-            }
-            for (int i = stop; i < output.length; i++) {
-                for (int j = 0; j < output[0].length; j++) {
-                    output[i][j] = RGBAPixel.getFillValue();
-                }
-            }
-            //inner rotation
-            for (int i = start; i < stop; i++) {
-                for (int j = 0; j < output[0].length; j++) {
-                    output[j][output[0].length - 1 - i] = new RGBAPixel(changedImage[i][j]);
-                }
-            }
-
-            //return
-            for (int i = 0; i < output.length; i++) {
-                for (int j = 0; j < output[i].length; j++) {
-                    System.out.print(output[i][j]);
-                }
-                System.out.println();
-            }
-            return output;
-
-        } else {
-            //define start and stop
-            int start = changedImage[0].length - changedImage.length - ((changedImage[0].length - changedImage.length) / 2);
-            int stop = changedImage[0].length - ((changedImage[0].length - changedImage.length) / 2);
-
-            //fill value
-            RGBAPixel[][] output = new RGBAPixel[changedImage.length][changedImage[0].length];
-            for (int i = 0; i < output.length; i++) {
-                for (int j = 0; j < start; j++) {
-                    output[i][j] = RGBAPixel.getFillValue();
-                }
-            }
-            for (int i = 0; i < output.length; i++) {
-                for (int j = stop; j < output[0].length; j++) {
-                    output[i][j] = RGBAPixel.getFillValue();
-                }
-            }
-
-            //inner rotation
-            System.out.println(output.length + " " + output[0].length);
-            for (int i = 0; i < output[0].length; i++) {
-                for (int j = start; j < stop; j++) {
-                    System.out.println(i + " "  + j);
-                    output[j][output.length - 1 - i] = new RGBAPixel(changedImage[i][j]);
-                }
-            }
-            //return
-            return output;
-
-        }
     }
 
     /**
@@ -239,15 +158,7 @@ public class Transform {
 
         RGBAPixel[][] changedImage = new RGBAPixel[originalImage.length][originalImage[0].length];
 
-        //fill changedImage with originalImage values
-        for (int i = 0; i < originalImage.length; i++) {
-            for (int j = 0; j < originalImage[0].length; j++) {
-                changedImage[i][j] = new RGBAPixel(originalImage[i][j]);
-            }
-        }
-
-        //rotate
-        return rotateRight(rotateRight(rotateRight(changedImage)));
+        return null;
     }
 
 
