@@ -17,21 +17,20 @@ public class Transform {
     public static RGBAPixel[][] expandHorizontal(final RGBAPixel[][] originalImage, final int amount) {
         RGBAPixel[][] changedImage = new RGBAPixel[originalImage.length][originalImage[0].length];
 
-        double centerFactor = (double)(changedImage.length - 1) / 2;
+        double centerFactor = (double) (changedImage.length - 1) / 2;
 
-         for (int i = 0; i < changedImage.length; i++) {
-             for (int j = 0; j < changedImage[i].length; j++) {
+        for (int i = 0; i < changedImage.length; i++) {
+            for (int j = 0; j < changedImage[i].length; j++) {
 
-                 double temp = i - centerFactor;
-                 temp /= amount;
-                 temp += centerFactor;
+                double temp = i - centerFactor;
+                temp /= amount;
+                temp += centerFactor;
 
-                 int rounded = (int)Math.round(temp);
-                 changedImage[i][j] = originalImage[rounded][j];
-
-             }
-         }
-         return changedImage;
+                int rounded = (int) Math.round(temp);
+                changedImage[i][j] = originalImage[rounded][j];
+            }
+        }
+        return changedImage;
     }
 
     /**
@@ -43,7 +42,7 @@ public class Transform {
     public static RGBAPixel[][] expandVertical(final RGBAPixel[][] originalImage, final int amount) {
         RGBAPixel[][] changedImage = new RGBAPixel[originalImage.length][originalImage[0].length];
 
-        double centerFactor = (double)(changedImage[0].length - 1) / 2;
+        double centerFactor = (double) (changedImage[0].length - 1) / 2;
 
         for (int i = 0; i < changedImage.length; i++) {
             for (int j = 0; j < changedImage[i].length; j++) {
@@ -52,7 +51,7 @@ public class Transform {
                 temp /= amount;
                 temp += centerFactor;
 
-                int rounded = (int)Math.round(temp);
+                int rounded = (int) Math.round(temp);
                 changedImage[i][j] = originalImage[i][rounded];
 
             }
@@ -114,22 +113,22 @@ public class Transform {
         return changedImage;
     }
 
-    /**
-     * Rotate right by 90 degrees
-     * @param input Input array
-     * @return Array rotated right by 90
-     */
-    public static  RGBAPixel[][] rotateSquare(final RGBAPixel[][] input) {
-
-        RGBAPixel[][] output = new RGBAPixel[input[0].length][input.length];
-
-        for (int i = 0; i < input.length; i++) {
-            for (int j = 0; j < input[0].length; j++) {
-                output[j][input.length - 1 - i] = new RGBAPixel(input[i][j]);
-            }
-        }
-        return output;
-    }
+//    /**
+//     * Rotate right by 90 degrees
+//     * @param input Input array
+//     * @return Array rotated right by 90
+//     */
+//    public static  RGBAPixel[][] rotateSquare(final RGBAPixel[][] input) {
+//
+//        RGBAPixel[][] output = new RGBAPixel[input[0].length][input.length];
+//
+//        for (int i = 0; i < input.length; i++) {
+//            for (int j = 0; j < input[0].length; j++) {
+//                output[j][input.length - 1 - i] = new RGBAPixel(input[i][j]);
+//            }
+//        }
+//        return output;
+//    }
 
     /**
      * Rotate the image left by 90 degrees around its center.
@@ -141,7 +140,7 @@ public class Transform {
             return null;
         }
 
-        RGBAPixel[][] changedImage = new RGBAPixel[originalImage.length][originalImage[0].length];
+        //RGBAPixel[][] changedImage = new RGBAPixel[originalImage.length][originalImage[0].length];
         return null;
 
     }
@@ -156,7 +155,7 @@ public class Transform {
             return null;
         }
 
-        RGBAPixel[][] changedImage = new RGBAPixel[originalImage.length][originalImage[0].length];
+        //RGBAPixel[][] changedImage = new RGBAPixel[originalImage.length][originalImage[0].length];
 
         return null;
     }
@@ -329,23 +328,23 @@ public class Transform {
         return changedImage;
     }
 
-    /**
-     * Shrink in the horizontal axis around the image center.
-     * @param originalImage The original image.
-     * @param amount The amount.
-     * @return The pixel.
-     */
-    public static RGBAPixel[][] shrinkHorizontal(final RGBAPixel[][] originalImage, final int amount) {
-        return null;
-    }
-
-    /**
-     * Shrink in the vertical axis around the image center.
-     * @param originalImage The original image.
-     * @param amount The amount.
-     * @return The pixel.
-     */
-    public static RGBAPixel[][] shrinkVertical(final RGBAPixel[][] originalImage, final int amount) {
-        return null;
-    }
+//    /**
+//     * Shrink in the horizontal axis around the image center.
+//     * @param originalImage The original image.
+//     * @param amount The amount.
+//     * @return The pixel.
+//     */
+//    public static RGBAPixel[][] shrinkHorizontal(final RGBAPixel[][] originalImage, final int amount) {
+//        return null;
+//    }
+//
+//    /**
+//     * Shrink in the vertical axis around the image center.
+//     * @param originalImage The original image.
+//     * @param amount The amount.
+//     * @return The pixel.
+//     */
+//    public static RGBAPixel[][] shrinkVertical(final RGBAPixel[][] originalImage, final int amount) {
+//        return null;
+//    }
 }
