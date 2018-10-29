@@ -93,7 +93,6 @@ public class Transform {
         }
 
         RGBAPixel[][] changedImage = new RGBAPixel[originalImage.length][originalImage[0].length];
-
         for (int i = 0; i < originalImage.length; i++) {
             for (int j = 0; j < originalImage[0].length; j++) {
                 double centered = (double) (originalImage[0].length - 1) / 2;
