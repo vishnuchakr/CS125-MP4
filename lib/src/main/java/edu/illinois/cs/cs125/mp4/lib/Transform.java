@@ -65,22 +65,18 @@ public class Transform {
      * @return The pixel.
      */
     public static RGBAPixel[][] flipHorizontal(final RGBAPixel[][] originalImage) {
-        //flip the 2d array vertically
         if (originalImage == null) {
             return null;
         }
 
         RGBAPixel[][] changedImage = new RGBAPixel[originalImage.length][originalImage[0].length];
-        for (int i = 0; i < changedImage.length; i++) {
-            for (int j = 0; j < changedImage[i].length; j++) {
-                int offset = Math.abs(i - (changedImage.length / 2));
-                int flip;
-                if (i < (changedImage.length / 2)) {
-                    flip = i + (2 * offset) - 1;
-                } else {
-                    flip = i - (2 * offset) - 1;
-                }
-                changedImage[flip][j] = new RGBAPixel(originalImage[i][j]);
+
+        for (int i = 0; i < originalImage.length; i++) {
+            for (int j = 0; j < originalImage[0].length; j++) {
+                double centered = (double) (originalImage.length - 1) / 2;
+                double x = i - centered;
+                int newX = (int) Math.round(-x + centered);
+                changedImage[i][j] = originalImage[newX][j];
             }
         }
         return changedImage;
@@ -92,43 +88,23 @@ public class Transform {
      * @return The pixel.
      */
     public static RGBAPixel[][] flipVertical(final RGBAPixel[][] originalImage) {
-        //flip the two d array horizontally
         if (originalImage == null) {
             return null;
         }
 
         RGBAPixel[][] changedImage = new RGBAPixel[originalImage.length][originalImage[0].length];
-        for (int i = 0; i < changedImage[0].length; i++) {
-            for (int j = 0; j < changedImage.length; j++) {
-                int offset = Math.abs(i - (changedImage[0].length / 2));
-                int flip;
-                if (i < (changedImage[0].length / 2)) {
-                    flip = i + (2 * offset) - 1;
-                } else {
-                    flip = i - (2 * offset) - 1;
-                }
-                changedImage[flip][j] = new RGBAPixel(originalImage[i][j]);
+
+        for (int i = 0; i < originalImage.length; i++) {
+            for (int j = 0; j < originalImage[0].length; j++) {
+                double centered = (double) (originalImage[0].length - 1) / 2;
+                double y = j - centered;
+                int newY = (int) Math.round(-y + centered);
+                changedImage[i][j] = originalImage[i][newY];
             }
         }
         return changedImage;
     }
 
-//    /**
-//     * Rotate right by 90 degrees
-//     * @param input Input array
-//     * @return Array rotated right by 90
-//     */
-//    public static  RGBAPixel[][] rotateSquare(final RGBAPixel[][] input) {
-//
-//        RGBAPixel[][] output = new RGBAPixel[input[0].length][input.length];
-//
-//        for (int i = 0; i < input.length; i++) {
-//            for (int j = 0; j < input[0].length; j++) {
-//                output[j][input.length - 1 - i] = new RGBAPixel(input[i][j]);
-//            }
-//        }
-//        return output;
-//    }
 
     /**
      * Rotate the image left by 90 degrees around its center.
@@ -140,10 +116,27 @@ public class Transform {
             return null;
         }
 
-        //RGBAPixel[][] changedImage = new RGBAPixel[originalImage.length][originalImage[0].length];
-        return null;
+        RGBAPixel[][] changedImage = new RGBAPixel[originalImage.length][originalImage[0].length];
 
+        for (int i = 0; i < originalImage.length; i++) {
+            for (int j = 0; j < originalImage[0].length; j++) {
+                double centeredX =  (double) (originalImage.length - 1) / 2;
+                double centeredY =  (double) (originalImage[0].length - 1) / 2;
+                double valX = i - centeredX;
+                double valY = j - centeredY;
+                int newX = (int) Math.round(-valY + centeredX);
+                int newY = (int) Math.round(valX + centeredY);
+                if (newX < originalImage.length && newX >= 0
+                        && newY < originalImage[0].length && newY >= 0) {
+                    changedImage[i][j] = originalImage[newX][newY];
+                } else {
+                    changedImage[i][j] = RGBAPixel.getFillValue();
+                }
+            }
+        }
+        return changedImage;
     }
+
 
     /**
      * Rotate the image right by 90 degrees around its center.
@@ -154,10 +147,7 @@ public class Transform {
         if (originalImage == null) {
             return null;
         }
-
-        //RGBAPixel[][] changedImage = new RGBAPixel[originalImage.length][originalImage[0].length];
-
-        return null;
+        return rotateLeft(rotateLeft(rotateLeft(originalImage)));
     }
 
 
